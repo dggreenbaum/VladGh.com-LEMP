@@ -10,7 +10,7 @@ INSTALL_PHPMYADMIN='no'
 
 # phpMyAdmin Version:
 # Ex: PHPMYADMIN_VERSION='4.0.5'
-PHPMYADMIN_VERSION='4.0.5'
+PHPMYADMIN_VERSION='4.0.6'
 
 # Memcached Server (yes/no)?
 # The PECL extension for PHP is installed by default to allow
