@@ -25,15 +25,16 @@ SUPPORTED_SERVER_PROG_LANGS=("php")
 #          GETOPTS          #
 #############################
 
-while getopts ":n:p:l:m" opt; do
+while getopts ":hn:p:l:m" opt; do
 	case $opt in
 		# Le assistance
 		h)
 			printf '%s\n' 'Generate a basic vhost file for NginX.
-			-n vhost name (EG sub.domain.tld)
-			-p server port (default 80)
-			-l vhost programming language (default PHP)
-			-m configure phpMyAdmin (option)'
+Usage: nxmksite -n name [-p port] [-l lang] [-m]
+	-n vhost name (EG sub.domain.tld)
+	-p server port (default 80)
+	-l vhost programming language (default PHP)
+	-m configure phpMyAdmin (optional)'
 			exit 0
 			;;
 		# Set the name of the vhost
@@ -92,7 +93,7 @@ fi
 BEGIN_SERVER_BLOCK='server {
 	listen '$SERVER_PORT';
 	server_name '$SERVER_NAME';
-	root '$SERVER_WEBROOT'/'$SERVER_NAME';
+	root '$SERVER_WEBROOT'/'$SERVER_NAME'/public_html;
 	charset '$SERVER_CHARSET';'
 
 H5BP='	# Include the component config parts for h5bp
@@ -149,4 +150,4 @@ printf '%s\n\n' "$END_SERVER_BLOCK" >> $VHOST_CONFIG_PATH/$SERVER_NAME
 #     MAKE THE WEBROOT      #
 #############################
 
-mkdir $SERVER_WEBROOT/$SERVER_NAME
+mkdir -p $SERVER_WEBROOT/$SERVER_NAME/public_html
